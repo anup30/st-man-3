@@ -87,7 +87,9 @@ python -m gunicorn student_management.asgi:application -k uvicorn.workers.Uvicor
 hi, can i use latest django version 5.1 to deploy my app to render? i was following clinton's youtube guide, 
 which says to use 3.2.1, but that video published in 2023.
 ===========================
+as Code With Clinton: https://www.youtube.com/watch?v=FJBTwa0R_5g&t=323s
 new process:
+cmd
 (myenv)
 pip install whitenoise
 in setting.py: in MIDDLEWARE[] add 'whitenoise.middleware.WhiteNoiseMiddleware', after SecurityMiddleware
@@ -99,4 +101,10 @@ pip install --upgrade Django (back to latest 5.1)
 pip install django==5.0.1 (as doc, supported)
 at 5:23 video clinton
 pip freeze > requirements.txt
+prepare build.sh
 
+
+render> new > webservice > create web service
+
+build: sh build.sh
+start: gunicorn student_management.wsgi:application
