@@ -1,0 +1,102 @@
+student_management_system: (v3)
+open folder in vs code, start git bash:
+
+python3 -m venv venv ---------(cmd: pip install virtualenv, python -m venv myenv)
+source venv/bin/activate  ------------(start # On cmd: myenv\Scripts\activate )
+pip install django
+------------------
+
+django-admin startproject student_management .
+python manage.py startapp students
+python manage.py startapp accounts
+------------------
+student_management> settings.py:  
+  in INSTALLED_APPS[...] add students, accounts, crispy_forms, crispy_bootstrap5
+  add crispy template & login logout url
+
+student_management> urls.py: add paths in urlpatterns
+students> models.py: write classes Course and Student
+students> create forms.py: write classes CourseForm, StudentForm, UserRegistrationForm, 
+students> views.py: write class based views
+students> create urls.py: write paths in urlpatterns[...]
+
+accounts> create forms.py: write class UserRegistrationForm
+accounts> views.py: write class RegisterView
+accounts> create urls.py: add RegisterView to path in urlpatterns[]
+
+cerate templates:
+students>templates>students:
+  base.html, student_list.html, student_detail.html, student_form.html, student_confirm_delete.html,
+  course_list.html, course_form.html, 
+
+accounts>templates>accounts:
+  login.html, resgister.html, 
+
+----------------
+students> admin.py: register Student and Course
+accounts>admin.py: empty
+
+
+-----------------------------------
+pip install django django-crispy-forms crispy-bootstrap5
+
+python manage.py makemigrations students
+python manage.py migrate
+
+python manage.py createsuperuser
+-admin
+-admin@example.com
+-1234
+
+
+
+python manage.py runserver
+
+python manage.py flush
+
+======================================
+for render: from https://render.com/docs/deploy-django
+cmd: 
+pip install virtualenv, 
+python -m venv myenv
+myenv\Scripts\activate
+
+
+pip install psycopg2-binary
+pip install dj-database-url
+pip freeze > requirements.txt
+
+in settings.py set database (task left......)
+
+pip install whitenoise[brotli]
+pip freeze > requirements.txt
+
+in setting.py: in MIDDLEWARE[] add 'whitenoise.middleware.WhiteNoiseMiddleware', after SecurityMiddleware
+
+settings.py: add code related to static
+
+Create a build script build.sh/ build.bat: (run: chmod a+x build.sh)
+or run build.bat --------- has error, run latter after setting database.
+
+
+pip install gunicorn uvicorn
+pip freeze > requirements.txt
+
+python -m gunicorn student_management.asgi:application -k uvicorn.workers.UvicornWorker
+
+hi, can i use latest django version 5.1 to deploy my app to render? i was following clinton's youtube guide, 
+which says to use 3.2.1, but that video published in 2023.
+===========================
+new process:
+(myenv)
+pip install whitenoise
+in setting.py: in MIDDLEWARE[] add 'whitenoise.middleware.WhiteNoiseMiddleware', after SecurityMiddleware
+
+pip install gunicorn
+pip install psycopg2
+pip install django==3.2.1 (4.2 ?)
+pip install --upgrade Django (back to latest 5.1)
+pip install django==5.0.1 (as doc, supported)
+at 5:23 video clinton
+pip freeze > requirements.txt
+
