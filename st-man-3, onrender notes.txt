@@ -54,10 +54,9 @@ python manage.py makemigrations students
 python manage.py migrate
 
 python manage.py createsuperuser
--admin
+-admin (different on supabase)
 -admin@example.com
 -1234
-
 
 
 python manage.py runserver
@@ -95,7 +94,7 @@ pip freeze > requirements.txt
 
 python -m gunicorn student_management.asgi:application -k uvicorn.workers.UvicornWorker
 
-hi, can i use latest django version 5.1 to deploy my app to render? i was following clinton's youtube guide, 
+query: hi, can i use latest django version 5.1 to deploy my app to render? i was following clinton's youtube guide, 
 which says to use 3.2.1, but that video published in 2023.
 ===========================
 as Code With Clinton: https://www.youtube.com/watch?v=FJBTwa0R_5g&t=323s
