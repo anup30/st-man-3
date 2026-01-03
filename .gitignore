@@ -1,3 +1,6 @@
+# dont push these files to git
+supabase notes.txt
+
 # Django #
 *.log
 *.pot
@@ -8,12 +11,14 @@ db.sqlite3
 db.sqlite3-journal
 media
 
+
 # If you're using PostgreSQL
 *.sql
 *.dump
 
 # Virtual Environment #
 venv/
+myenv/
 env/
 ENV/
 .env

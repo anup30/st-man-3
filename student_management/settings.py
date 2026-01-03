@@ -2,6 +2,8 @@ import dj_database_url
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -66,21 +68,27 @@ WSGI_APPLICATION = 'student_management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+"""
+# local sqlite database
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': BASE_DIR / 'db.sqlite3', }
+}
+"""
+
+# for render.com's supabase postgres database (gets deactivated after few days on free plan - try in supabase)
+# DATABASES["default"] = dj_database_url.parse("postgresql://anup30_django_render_user:wDHOcOHZju59YPhD2Qz4M2ZCczgOdCQZ@dpg-cvbd0gqn91rc739fmrd0-a.oregon-postgres.render.com/anup30_django_render")
+
+# supabase postgres database
+DATABASES = {    
+    'default': dj_database_url.config(
+        default= os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
-#DATABASES = {
-#    'default': dj_database_url.config(        """Replace this value with your local database's connection string.        default='postgresql://postgres:postgres@localhost:5432/mysite',        conn_max_age=600  """  )}
 
-DATABASES["default"] = dj_database_url.parse("postgresql://anup30_django_render_user:wDHOcOHZju59YPhD2Qz4M2ZCczgOdCQZ@dpg-cvbd0gqn91rc739fmrd0-a.oregon-postgres.render.com/anup30_django_render")
-# postgresql://anup30_django_render_user:wDHOcOHZju59YPhD2Qz4M2ZCczgOdCQZ@dpg-cvbd0gqn91rc739fmrd0-a.oregon-postgres.render.com/anup30_django_render
-
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+# Password validation: https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
