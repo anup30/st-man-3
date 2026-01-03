@@ -1,9 +1,10 @@
 (solved)
 django OneToOneField delete problem
-hi, in my django student_management_system app if i delete a Student it gets deleted,
-but it's OneToOneField User (django's built in User) is not getting deleted, 
+if i delete a Student it gets deleted, but it's 
+OneToOneField User (django's built in User) is not getting deleted, 
 it still exists in database,  ie. in auth_user of db.sqlite3. how to fix this.
-github code: https://github.com/anup30/student_management_system
-the problem is also written in problem.txt there.
+
+stackoverflow question: 
+https://stackoverflow.com/questions/79509468/how-to-delete-onetoonefield-of-a-model-class-in-django
 
 solved using custom delete function in Student model in students/models.py

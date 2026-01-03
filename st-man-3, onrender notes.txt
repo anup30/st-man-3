@@ -113,7 +113,7 @@ at 5:23 video clinton
 pip freeze > requirements.txt
 prepare build.sh
 
-
+gmail account used for render: anup30coc@gmail.com
 render> new > webservice > create web service
 
 build: sh build.sh
